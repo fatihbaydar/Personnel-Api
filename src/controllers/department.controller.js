@@ -55,14 +55,13 @@ module.exports = {
   },
 
   personnels: async (req, res) => {
-    //! veri
-    const filter = { departmentId: req.params.id };
+
+    const filter = {departmentId:req.params.id}
     const data = await res.getModelList(Personnel, filter, "departmentId");
     res.status(200).send({
-      error: false,
-      //! detay
+      error:false,
       detail: await res.getModelListDetails(Personnel, filter),
-      data,
-    });
+      data
+    })
   },
 };
