@@ -20,6 +20,15 @@ const PORT = process.env?.PORT || 8000;
 require("express-async-errors");
 /* ------------------------------------------------------- */
 
+//? LOGGER
+
+const morgan = require("morgan")
+// app.use(morgan("tiny"))
+// app.use(morgan("short"))
+// app.use(morgan("dev"))
+// app.use(morgan("common"))
+app.use(morgan("combined"))
+
 // veri tabanına bağlanma:
 dbConnection();
 
