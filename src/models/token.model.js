@@ -9,7 +9,7 @@ const TokenSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref:"Personnel",
             index:true,
-            required:index,
+            required:true,
             unique:true
         },
         token:{

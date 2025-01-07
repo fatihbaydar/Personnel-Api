@@ -46,10 +46,12 @@ app.all("/", (req, res) => {
 });
 
 // departmanlar
-app.use("/department", require("./src/routes/department.router"))
+// app.use("/department", require("./src/routes/department.router"))
 
 // personeller
-app.use("/personnel", require("./src/routes/personnel.router"))
+// app.use("/personnel", require("./src/routes/personnel.router"))
+
+app.use(require("./src/routes/index"))
 
 // bulunamadı yolu: hatalı URL yazılırsa tespiti daha kolay olur
 app.all(".", (req, res) => {

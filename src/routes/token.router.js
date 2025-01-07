@@ -2,7 +2,7 @@
 
 const {isAdmin} = require("../middlewares/permission")
 const router = require("express").Router()
-const {list,create,update,delete:deleteToken} = require("../controllers/token.controller")
+const {list,read, create,update,delete:deleteToken} = require("../controllers/token.controller")
 
 router.use(isAdmin)
 
