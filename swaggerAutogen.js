@@ -1,7 +1,5 @@
 "use strict";
-/* -------------------------------------------------------
-    EXPRESS - Personnel API
-------------------------------------------------------- */
+
 // Swagger Autogen
 // https://swagger-autogen.github.io/docs/
 // $ npm i swagger-autogen # JSON creator
@@ -30,13 +28,43 @@ const options = {
 // const swaggerAutogen = require("swagger-autogen")({openapi:"3.0.0", language:tr-TR})
 const swaggerAutogen = require("swagger-autogen")()
 
+const packageJson = require("./package.json")
+
 const document = {
+    // info: {
+    //     version:"1.1.0",
+    //     title:"PersonnelAPI",
+    //     description:"Personnel Management System",
+    //     termOfService:"http://127.0.0.1:",
+    //     contact:{name:"Baydar", email: "baydar@baydar.com"},
+    //     license:{name:"Yorkup License"}
+    // }
+
+    //* doğrudan package.json dosyasından verileri aldık. 
     info: {
-        version:"1.1.0",
-        title:"PersonnelAPI",
-        description:"Personnel Management System",
-        termOfService:"http://127.0.0.1:",
-        contact:{name:"Baydar", email: "baydar@baydar.com"},
-        license:{name:"Yorkup License"}
-    }
+        version: packageJson.version,
+        title: packageJson.name,
+        description: packageJson.description,
+        // termOfService:"http://127.0.0.1:",
+        contact: { name: packageJson.author, email: "baydar@baydar.com" },
+        license: { name: packageJson.license }
+    },
+    host: HOST + ":" + PORT,
+    basePath: "/",
+    schemes: ["http", "https"],
+    securityDefinitions: {
+        Token: {
+            type: "apiKey",
+            in: "header",
+            name: "Authorization",
+            description: "Simple Token * Örnek: Token...tokenKey.."
+        }
+    },
+    security: [{ Token: [] }]
 }
+
+const routes = ["./index.js"]
+const outputFile = "./swagger.json"
+
+// Çalışması
+swaggerAutogen(outputFile, routes, document)
