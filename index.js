@@ -51,6 +51,12 @@ require("express-async-errors");
 //! logger isimli middleware dosyasna taşındı
 app.use(require("./src/middlewares/logger"))
 
+//? SWAGGER
+const swaggerUi = require('swagger-ui-express')
+const swaggerJson = require('./swagger.json')
+
+app.use('/documents/swagger', swaggerUi.serve, swaggerUi.setup(swaggerJson, { swaggerOptions: { persistAuthorization: true } }))
+
 // veri tabanına bağlanma:
 dbConnection();
 
@@ -60,7 +66,7 @@ app.use(express.json());
 // cookie: httpOnly:true XSS Cross Site Scripting, secure:https
 const session = require("cookie-session")
 app.use(session({
-    secret:process.env.SECRET_KEY, // Cookie verisini şifreleme anahtarı
+  secret: process.env.SECRET_KEY, // Cookie verisini şifreleme anahtarı
 }))
 
 // res.getModelList
