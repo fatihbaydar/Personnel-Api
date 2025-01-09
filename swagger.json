@@ -29,19 +29,26 @@
   "paths": {
     "/auth/login": {
       "post": {
-        "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Giriş",
+        "description": "Kullanıcı adı ve paraola ile giriş",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "username": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "*String"
                 },
                 "password": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "*String"
                 }
               }
             }

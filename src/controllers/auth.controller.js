@@ -8,6 +8,22 @@ module.exports = {
     //! Giriş ve Çıkış işlemleri
 
     login: async (req, res) => {
+
+        /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'Giriş'
+            #swagger.description = `Kullanıcı adı ve paraola ile giriş`
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                    username: '*String',
+                    password: '*String'
+                }
+            }
+            _swagger.ignore = true
+            _swagger.deprecated = true
+        */
         const { username, password } = req.body
 
         if (username && password) {
