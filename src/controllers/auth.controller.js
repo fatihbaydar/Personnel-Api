@@ -57,6 +57,10 @@ module.exports = {
         }
     },
     logout: async (req,res) => {
+        /*
+            #swagger.tags = ['Authentication']
+            #swagger.summary = 'Çıkış'
+        */
         req.session = null // oturum bilgilerini temizle
 
         const auth = req.headers?.authorization || null
