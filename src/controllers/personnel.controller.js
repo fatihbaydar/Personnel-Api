@@ -5,6 +5,19 @@ const Personnel = require("../models/personnel.model");
 
 module.exports = {
   list: async (req, res) => {
+    /*
+        #swagger.tags = ['Personneller']
+        #swagger.summary = 'Listele'
+        #swagger.description = `
+            Şu metodları kullanarak istek gönderebilirsiniz: filter[], search[], sort[], page ve limit.
+            <ul> Örnekler:
+                <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>
+                <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>
+                <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>
+                <li>URL/?<b>page=2&limit=1</b></li>
+            </ul>
+        `
+    */
     const data = await res.getModelList(Personnel, {}, "departmentId");
     res.status(200).send({
       error: false,
@@ -14,6 +27,17 @@ module.exports = {
   },
 
   create: async (req, res) => {
+       /*
+        #swagger.tags = ['Personneller']
+        #swagger.summary = 'Oluşturma'
+        #swagger.parameters['body'] = {
+            in: 'body',
+            required: true,
+            schema: {
+               $ref:"#/definitions/Personnel"
+            }
+        }
+       */
     //* admin'i doğrudan false'a çek:
     req.body.isAdmin = false;
 
@@ -36,6 +60,10 @@ module.exports = {
   },
 
   read: async (req, res) => {
+       /*
+        #swagger.tags = ['Personneller']
+        #swagger.summary = 'Okuma'
+       */
     const data = await Personnel.findOne({ _id: req.params.id });
     res.status(200).send({
       error: false,
@@ -44,6 +72,16 @@ module.exports = {
   },
 
   update: async (req, res) => {
+       /*
+        #swagger.tags = ['Personneller']
+        #swagger.summary = 'Güncelle'
+        #swagger.parameters['body'] = {
+          in: 'body',
+          required: true,
+          schema: {
+            $ref:"#/definitions/Personnel"
+        }
+       */
     const isLead = req.body.isLead || false;
 
     if (isLead) {
@@ -70,6 +108,10 @@ module.exports = {
   },
 
   delete: async (req, res) => {
+       /*
+        #swagger.tags = ['Personneller']
+        #swagger.summary = 'Silme'
+       */
     const data = await Personnel.deleteOne({ _id: req.params.id });
     res.status(data.deletedCount ? 204 : 404).send({
       error: !data.deletedCount,

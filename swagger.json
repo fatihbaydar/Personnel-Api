@@ -30,7 +30,7 @@
     "/auth/login": {
       "post": {
         "tags": [
-          "Authentication"
+          "Kimlik doğrulama"
         ],
         "summary": "Giriş",
         "description": "Kullanıcı adı ve paraola ile giriş",
@@ -209,7 +209,11 @@
     },
     "/personnel/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Personneller"
+        ],
+        "summary": "Listele",
+        "description": "\r  Şu metodları kullanarak istek gönderebilirsiniz: filter[], search[], sort[], page ve limit.\r  <ul> Örnekler:\r  <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r  <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r  <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r  <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -217,24 +221,18 @@
         }
       },
       "post": {
+        "tags": [
+          "Personneller"
+        ],
+        "summary": "Oluşturma",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "isAdmin": {
-                  "example": "any"
-                },
-                "isLead": {
-                  "example": "any"
-                },
-                "departmentId": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/Personnel"
             }
           }
         ],
@@ -247,6 +245,10 @@
     },
     "/personnel/{id}": {
       "get": {
+        "tags": [
+          "Personneller"
+        ],
+        "summary": "Okuma",
         "description": "",
         "parameters": [
           {
@@ -263,6 +265,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Personneller"
+        ],
+        "summary": "Güncelle",
         "description": "",
         "parameters": [
           {
@@ -279,18 +285,34 @@
               "properties": {
                 "isLead": {
                   "example": "any"
+                },
+                "departmentId": {
+                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
       "delete": {
+        "tags": [
+          "Personneller"
+        ],
+        "summary": "Silme",
         "description": "",
         "parameters": [
           {
@@ -310,6 +332,10 @@
         }
       },
       "patch": {
+        "tags": [
+          "Personneller"
+        ],
+        "summary": "Güncelle",
         "description": "",
         "parameters": [
           {
@@ -326,14 +352,280 @@
               "properties": {
                 "isLead": {
                   "example": "any"
+                },
+                "departmentId": {
+                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Department": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "unique": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        }
+      }
+    },
+    "Personnel": {
+      "type": "object",
+      "properties": {
+        "departmentId": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "ref": {
+              "type": "string",
+              "example": "Department"
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "username": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "unique": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "password": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "set": {
+              "type": "function"
+            }
+          }
+        },
+        "firstName": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "lastName": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "phone": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "email": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            },
+            "unique": {
+              "type": "boolean",
+              "example": true
+            },
+            "validate": {
+              "type": "array",
+              "example": [
+                null,
+                "Geçersiz e posta adresi"
+              ],
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "title": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "required": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "salary": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "number",
+              "example": 0
+            }
+          }
+        },
+        "description": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "trim": {
+              "type": "boolean",
+              "example": true
+            },
+            "default": {}
+          }
+        },
+        "isActive": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "boolean",
+              "example": true
+            }
+          }
+        },
+        "isAdmin": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "boolean",
+              "example": false
+            }
+          }
+        },
+        "isLead": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "boolean",
+              "example": false
+            }
+          }
+        },
+        "startedAt": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "function"
+            },
+            "default": {
+              "type": "number",
+              "example": 1736510626094
+            }
           }
         }
       }

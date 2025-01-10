@@ -10,7 +10,7 @@ module.exports = {
     login: async (req, res) => {
 
         /*
-            #swagger.tags = ['Authentication']
+            #swagger.tags = ['Kimlik doğrulama']
             #swagger.summary = 'Giriş'
             #swagger.description = `Kullanıcı adı ve paraola ile giriş`
             #swagger.parameters['body'] = {

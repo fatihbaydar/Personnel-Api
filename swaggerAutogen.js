@@ -60,7 +60,13 @@ const document = {
             description: "Simple Token * Örnek: Token...tokenKey.."
         }
     },
-    security: [{ Token: [] }]
+    security: [{ Token: [] }],
+
+    //Models
+    definitions: {
+        "Department": require("./src/models/department.model").schema.obj,
+        "Personnel": require("./src/models/personnel.model").schema.obj,
+    }
 }
 
 const routes = ["./index.js"]
