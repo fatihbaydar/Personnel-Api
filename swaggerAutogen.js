@@ -62,7 +62,7 @@ const document = {
     },
     security: [{ Token: [] }],
 
-    //Models
+    //Modeller ve onların alanları
     definitions: {
         "Department": require("./src/models/department.model").schema.obj,
         "Personnel": require("./src/models/personnel.model").schema.obj,

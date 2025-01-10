@@ -64,7 +64,7 @@
     "/auth/logout": {
       "get": {
         "tags": [
-          "Authentication"
+          "Kimlik doğrulama"
         ],
         "summary": "Çıkış",
         "description": "",
@@ -77,7 +77,11 @@
     },
     "/department/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Departmanlar"
+        ],
+        "summary": "Listele",
+        "description": "\r  Şu metodları kullanarak istek gönderebilirsiniz: filter[], search[], sort[], page ve limit.\r  <ul> Örnekler:\r  <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r  <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r  <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>\r  <li>URL/?<b>page=2&limit=1</b></li>\r  </ul>\r  ",
         "responses": {
           "200": {
             "description": "OK"
@@ -85,7 +89,21 @@
         }
       },
       "post": {
+        "tags": [
+          "Departmanlar"
+        ],
+        "summary": "Oluşturma",
         "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Department"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -95,6 +113,10 @@
     },
     "/department/{id}": {
       "get": {
+        "tags": [
+          "Departmanlar"
+        ],
+        "summary": "Okuma",
         "description": "",
         "parameters": [
           {
@@ -111,6 +133,10 @@
         }
       },
       "put": {
+        "tags": [
+          "Departmanlar"
+        ],
+        "summary": "Güncelle",
         "description": "",
         "parameters": [
           {
@@ -121,12 +147,25 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       },
       "delete": {
+        "tags": [
+          "Departmanlar"
+        ],
+        "summary": "Silme",
         "description": "",
         "parameters": [
           {
@@ -146,6 +185,10 @@
         }
       },
       "patch": {
+        "tags": [
+          "Departmanlar"
+        ],
+        "summary": "Güncelle",
         "description": "",
         "parameters": [
           {
@@ -156,14 +199,27 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
     },
     "/department/{id}/personnel": {
       "get": {
+        "tags": [
+          "Departmanlar"
+        ],
+        "summary": "Listele",
         "description": "",
         "parameters": [
           {
@@ -183,26 +239,9 @@
     "/personnel/login": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "username": {
-                  "example": "any"
-                },
-                "password": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "default": {
+            "description": ""
           }
         }
       }
@@ -285,18 +324,12 @@
               "properties": {
                 "isLead": {
                   "example": "any"
-                },
-                "departmentId": {
-                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -352,18 +385,12 @@
               "properties": {
                 "isLead": {
                   "example": "any"
-                },
-                "departmentId": {
-                  "example": "any"
                 }
               }
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -624,7 +651,7 @@
             },
             "default": {
               "type": "number",
-              "example": 1736510626094
+              "example": 1736513189071
             }
           }
         }
