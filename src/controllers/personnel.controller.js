@@ -119,47 +119,47 @@ module.exports = {
     });
   },
 
-  login: async (req, res) => {
-    const { username, password } = req.body;
+  // login: async (req, res) => {
+  //   const { username, password } = req.body;
 
-    if (username && password) {
-      const user = await Personnel.findOne({ username, password });
-      if (user) {
-        if (user.password !== passwordEncrypt(password)) {
-          res.errorStatusCode = 401;
-          throw new Error("Giriş gereklilikleri yanlış");
-        }
+  //   if (username && password) {
+  //     const user = await Personnel.findOne({ username, password });
+  //     if (user) {
+  //       if (user.password !== passwordEncrypt(password)) {
+  //         res.errorStatusCode = 401;
+  //         throw new Error("Giriş gereklilikleri yanlış");
+  //       }
 
-        req.session = {
-          id: user._id,
-          password: user.password,
-        };
+  //       req.session = {
+  //         id: user._id,
+  //         password: user.password,
+  //       };
 
-        if (req.body?.rememberMe) {
-          req.session.rememberMe = true;
-          req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 3;
-        }
+  //       if (req.body?.rememberMe) {
+  //         req.session.rememberMe = true;
+  //         req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 3;
+  //       }
 
-        res.status(200).send({
-          error: false,
-          message: "Giriş işlemi başarılı",
-          user,
-        });
-      } else {
-        res.errorStatusCode = 401;
-        throw new Error("Yanlış kullanıcı bilgisi");
-      }
-    } else {
-      res.errorStatusCode = 401;
-      throw new Error("Lütfen geçerli bir email ve parola girin");
-    }
-  },
+  //       res.status(200).send({
+  //         error: false,
+  //         message: "Giriş işlemi başarılı",
+  //         user,
+  //       });
+  //     } else {
+  //       res.errorStatusCode = 401;
+  //       throw new Error("Yanlış kullanıcı bilgisi");
+  //     }
+  //   } else {
+  //     res.errorStatusCode = 401;
+  //     throw new Error("Lütfen geçerli bir email ve parola girin");
+  //   }
+  // },
 
-  logout: async (req, res) => {
-    req.session = null;
-    res.send({
-      error: false,
-      message: "Çıkış işlemi gerçekleştirildi",
-    });
-  },
+  // logout: async (req, res) => {
+  //   req.session = null;
+  //   res.send({
+  //     error: false,
+  //     message: "Çıkış işlemi gerçekleştirildi",
+  //   });
+  // },
 };
